@@ -19,7 +19,6 @@ const Filter = ({ type, typeChange, gen, genChange }) => {
         <h4>Generation</h4>
         <div>
           <select name="gen" id="gen" onChange={genChange}>
-            <option value="">1</option>
             {gen.map((gen) => (
               <option value={gen.name}>{gen.name}</option>
             ))}
