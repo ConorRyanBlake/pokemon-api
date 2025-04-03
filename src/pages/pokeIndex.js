@@ -14,10 +14,13 @@ const Index = () => {
   const [type, setType] = useState([]);
   const [selectedType, setSelectedType] = useState("");
   const [gen, setGen] = useState([]);
-  const [selectedGen, setSelectedGen] = useState("");
+  const [selectedGen, setSelectedGen] = useState("generation-i");
 
   //   Loading state
   const [isLoading, setIsLoading] = useState(true);
+
+  console.log("DisplayedPokemon", displayedPokemon);
+  console.log("Pokemon", allPokemon);
 
   // Search
   const searchChange = (e) => {
@@ -52,7 +55,7 @@ const Index = () => {
 
         // Fetch pokemon
         const pokemonResponse = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=1302"
+          "https://pokeapi.co/api/v2/pokemon?limit=1025"
         );
         const pokemonData = await pokemonResponse.json();
 
@@ -111,37 +114,37 @@ const Index = () => {
             (pokemon) => pokemon.id > 151 && pokemon.id <= 251
           );
           break;
-          case "generation-iii":
-            filteredPokemon = filteredPokemon.filter(
-              (pokemon) => pokemon.id > 251 && pokemon.id <= 386
-            );
-            break;
-            case "generation-iv":
+        case "generation-iii":
+          filteredPokemon = filteredPokemon.filter(
+            (pokemon) => pokemon.id > 251 && pokemon.id <= 386
+          );
+          break;
+        case "generation-iv":
           filteredPokemon = filteredPokemon.filter(
             (pokemon) => pokemon.id > 386 && pokemon.id <= 493
           );
           break;
-          case "generation-v":
+        case "generation-v":
           filteredPokemon = filteredPokemon.filter(
             (pokemon) => pokemon.id > 493 && pokemon.id <= 649
           );
           break;
-          case "generation-vi":
+        case "generation-vi":
           filteredPokemon = filteredPokemon.filter(
             (pokemon) => pokemon.id > 649 && pokemon.id <= 721
           );
           break;
-          case "generation-vii":
+        case "generation-vii":
           filteredPokemon = filteredPokemon.filter(
             (pokemon) => pokemon.id > 721 && pokemon.id <= 809
           );
           break;
-          case "generation-viii":
+        case "generation-viii":
           filteredPokemon = filteredPokemon.filter(
             (pokemon) => pokemon.id > 809 && pokemon.id <= 905
           );
           break;
-          case "generation-ix":
+        case "generation-ix":
           filteredPokemon = filteredPokemon.filter(
             (pokemon) => pokemon.id > 905 && pokemon.id <= 1025
           );
@@ -152,9 +155,11 @@ const Index = () => {
     }
 
     if (search) {
-        filteredPokemon = filteredPokemon.filter(pokemon => 
-            pokemon.name.includes(search)
-        );
+      filteredPokemon = filteredPokemon.filter(
+        (pokemon) =>
+          pokemon.name.includes(search) ||
+          pokemon.id.toString().includes(search)
+      );
     }
 
     setDisplayedPokemon(filteredPokemon);
@@ -162,17 +167,19 @@ const Index = () => {
 
   return (
     <div>
-      <h1>Pokédex</h1>
-      <div>
-        <Search searchChange={searchChange} />
-      </div>
-      <div>
-        <Filter
-          typeChange={typeChange}
-          type={type}
-          genChange={genChange}
-          gen={gen}
-        />
+      <div className="pokedex-container">
+        <h1>Pokédex</h1>
+        <div>
+          <Search searchChange={searchChange} />
+        </div>
+        <div>
+          <Filter
+            typeChange={typeChange}
+            type={type}
+            genChange={genChange}
+            gen={gen}
+          />
+        </div>
       </div>
       {isLoading ? (
         <div>Loading Pokémon data...</div>
