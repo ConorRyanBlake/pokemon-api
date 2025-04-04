@@ -19,9 +19,6 @@ const Index = () => {
   //   Loading state
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("DisplayedPokemon", displayedPokemon);
-  console.log("Pokemon", allPokemon);
-
   // Search
   const searchChange = (e) => {
     setSearch(e.target.value.toLowerCase());
@@ -35,6 +32,13 @@ const Index = () => {
   // Selected type
   const typeChange = (e) => {
     setSelectedType(e.target.value);
+  };
+
+  // Clear filter funtion
+  const clearFilters = () => {
+    setSelectedType("");
+    setSelectedGen("generation-i");
+    setSearch("");
   };
 
   // Fetch the Pokemon
@@ -167,22 +171,36 @@ const Index = () => {
 
   return (
     <div>
-      <div className="pokedex-container">
-        <h1>Pokédex</h1>
-        <div>
-          <Search searchChange={searchChange} />
-        </div>
-        <div>
-          <Filter
-            typeChange={typeChange}
-            type={type}
-            genChange={genChange}
-            gen={gen}
-          />
+      <h1>PokeDex</h1>
+      <div className="card">
+        <div className="card-body d-flex">
+          <div className="row g-3">
+            <Search searchChange={searchChange} />
+          </div>
+          <div>
+            <Filter
+              typeChange={typeChange}
+              type={type}
+              genChange={genChange}
+              gen={gen}
+              selectedType={selectedType}
+              selectedGen={selectedGen}
+              clearFilters={clearFilters}
+            />
+          </div>
         </div>
       </div>
+
       {isLoading ? (
-        <div>Loading Pokémon data...</div>
+        <div className="d-flex justify-content-center my-5">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : displayedPokemon.length === 0 ? (
+        <div className="alert alert-info text-center my-5">
+          No Pokémon found matching your filters
+        </div>
       ) : (
         <div className="pokeList">
           <PokeList pokemon={displayedPokemon} />

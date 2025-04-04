@@ -2,16 +2,17 @@ import React from "react";
 
 const Search = ({ search, searchChange }) => {
   return (
-    <div className="seach-container">
-      <div className="search-wrapper">
-        <div className="search-icon">
+    <div className="col-12">
+      <div className="input-group">
+        <span className="input-text-group">
           <i className="bi bi-search"></i>
-        </div>
+        </span>
         <input
           type="search"
-          className="search-input"
-          placeholder="Search"
+          className="form-control"
+          placeholder="Search Pokémon by name or ID..."
           onChange={searchChange}
+          value={search}
         />
       </div>
     </div>
