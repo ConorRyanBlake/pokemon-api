@@ -31,6 +31,7 @@ const Filter = ({
         <div className="dropdown" style={{ position: "relative" }}>
           <button
             className="btn btn-outline-secondary dropdown-toggle"
+            style={{width: "100px"}}
             onClick={() => {
               setTypeDropdownOpen(!typeDropdownOpen);
               setGenDropdownOpen(false);
@@ -94,6 +95,7 @@ const Filter = ({
         <div className="dropdowns" style={{ position: "relative" }}>
           <button
             className="btn btn-outline-secondary dropdown-toggle"
+            style={{width: "150px"}}
             onClick={() => {
               setGenDropdownOpen(!genDropdownOpen);
               setTypeDropdownOpen(false);
@@ -109,6 +111,7 @@ const Filter = ({
               display: genDropdownOpen ? "block" : "none",
               position: "absolute",
               zIndex: 1000,
+              width: "200px"
             }}
           >
             <li>

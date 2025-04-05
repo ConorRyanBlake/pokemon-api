@@ -4,9 +4,11 @@ const Search = ({ search, searchChange }) => {
   return (
     <div className="col-12">
       <div className="input-group">
-        <span className="input-text-group">
-          <i className="bi bi-search"></i>
-        </span>
+        <div className="input-group-prepend">
+          <span className="input-group-text d-flex align-items-center justify-content-center px-3">
+            <i className="bi bi-search"></i>
+          </span>
+        </div>
         <input
           type="search"
           className="form-control"

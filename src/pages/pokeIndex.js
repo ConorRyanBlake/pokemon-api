@@ -172,9 +172,9 @@ const Index = () => {
   return (
     <div>
       <h1>PokeDex</h1>
-      <div className="card">
-        <div className="card-body d-flex">
-          <div className="row g-3">
+      <div className="card mb-3 m-lg-5">
+        <div className="card-body">
+          <div className="row g-3 mb-3">
             <Search searchChange={searchChange} />
           </div>
           <div>
